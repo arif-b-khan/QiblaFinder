@@ -80,7 +80,7 @@ public class SettingsViewModel : BaseViewModel
             // If using manual location, save it
             if (UseManualLocation)
             {
-                var location = new Location(ManualLatitude, ManualLongitude);
+                var location = new QiblaLocation(ManualLatitude, ManualLongitude);
                 await _geolocationService.SaveLocationAsync(location);
             }
             

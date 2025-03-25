@@ -13,7 +13,7 @@ public class CompassService : ICompassService
     public double CurrentHeading => _currentHeading;
     public bool IsCalibrationRequired => _isCalibrationRequired;
     
-    public event EventHandler<CompassChangedEventArgs> CompassChanged;
+    public event EventHandler<Services.CompassChangedEventArgs> CompassChanged;
     
     public CompassService()
     {
@@ -69,7 +69,7 @@ public class CompassService : ICompassService
         return Task.FromResult(true);
     }
     
-    private void OnCompassReadingChanged(object sender, CompassChangedEventArgs e)
+    private void OnCompassReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.CompassChangedEventArgs e)
     {
         _currentHeading = e.Reading.HeadingMagneticNorth;
         

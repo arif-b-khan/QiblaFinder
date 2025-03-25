@@ -6,7 +6,7 @@ namespace MeccaCompass.Services;
 
 public class GeolocationService : IGeolocationService
 {
-    private Location _cachedLocation;
+    private QiblaLocation _cachedLocation;
     private readonly IPreferences _preferences;
     
     public event EventHandler<LocationChangedEventArgs> LocationChanged;
@@ -17,7 +17,7 @@ public class GeolocationService : IGeolocationService
         LoadCachedLocation();
     }
 
-    public async Task<Location> GetCurrentLocationAsync()
+    public async Task<QiblaLocation> GetCurrentLocationAsync()
     {
         try
         {
@@ -38,7 +38,7 @@ public class GeolocationService : IGeolocationService
 
             if (mauilocation != null)
             {
-                var location = new Location(mauilocation.Latitude, mauilocation.Longitude);
+                var location = new QiblaLocation(mauilocation.Latitude, mauilocation.Longitude);
                 _cachedLocation = location;
                 await SaveLocationAsync(location);
                 
@@ -57,12 +57,12 @@ public class GeolocationService : IGeolocationService
         return await GetCachedLocationAsync();
     }
 
-    public Task<Location> GetCachedLocationAsync()
+    public Task<QiblaLocation> GetCachedLocationAsync()
     {
         return Task.FromResult(_cachedLocation);
     }
 
-    public Task<bool> SaveLocationAsync(Location location)
+    public Task<bool> SaveLocationAsync(QiblaLocation location)
     {
         if (location == null)
             return Task.FromResult(false);
@@ -87,7 +87,7 @@ public class GeolocationService : IGeolocationService
             var latitude = _preferences.Get("LastLatitude", 0.0);
             var longitude = _preferences.Get("LastLongitude", 0.0);
             
-            _cachedLocation = new Location(latitude, longitude);
+            _cachedLocation = new QiblaLocation(latitude, longitude);
             
             if (_preferences.ContainsKey("LastLocationTimestamp"))
             {
@@ -101,7 +101,7 @@ public class GeolocationService : IGeolocationService
         else
         {
             // Default location (can be customized)
-            _cachedLocation = new Location(0, 0);
+            _cachedLocation = new QiblaLocation(0, 0);
         }
     }
 }

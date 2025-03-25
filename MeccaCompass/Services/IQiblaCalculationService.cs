@@ -12,11 +12,11 @@ public interface IQiblaCalculationService
     double CalculateQiblaDirection(double latitude, double longitude);
     
     // Calculate the Qibla direction (bearing) from a location object
-    double CalculateQiblaDirection(Location location);
+    double CalculateQiblaDirection(QiblaLocation location);
     
     // Calculate the distance to Mecca from a given location
     double CalculateDistanceToMecca(double latitude, double longitude);
     
     // Calculate the distance to Mecca from a location object
-    double CalculateDistanceToMecca(Location location);
+    double CalculateDistanceToMecca(QiblaLocation location);
 }

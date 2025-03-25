@@ -18,7 +18,7 @@ public class MainViewModel : BaseViewModel
     private bool _isLocationAvailable;
     private bool _isCompassAvailable;
     private bool _showCalibrationAlert;
-    private Location _currentLocation;
+    private QiblaLocation _currentLocation;
 
     public MainViewModel(
         IGeolocationService geolocationService,
@@ -174,7 +174,7 @@ public class MainViewModel : BaseViewModel
         QiblaAngle = (QiblaDirection - CompassHeading + 360) % 360;
     }
     
-    private void OnCompassChanged(object sender, CompassChangedEventArgs e)
+    private void OnCompassChanged(object sender, MeccaCompass.Services.CompassChangedEventArgs e)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {

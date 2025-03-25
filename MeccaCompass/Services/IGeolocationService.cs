@@ -4,18 +4,18 @@ namespace MeccaCompass.Services;
 
 public interface IGeolocationService
 {
-    Task<Location> GetCurrentLocationAsync();
-    Task<Location> GetCachedLocationAsync();
-    Task<bool> SaveLocationAsync(Location location);
+    Task<QiblaLocation> GetCurrentLocationAsync();
+    Task<QiblaLocation> GetCachedLocationAsync();
+    Task<bool> SaveLocationAsync(QiblaLocation location);
     
     event EventHandler<LocationChangedEventArgs> LocationChanged;
 }
 
 public class LocationChangedEventArgs : EventArgs
 {
-    public Location Location { get; }
+    public QiblaLocation Location { get; }
     
-    public LocationChangedEventArgs(Location location)
+    public LocationChangedEventArgs(QiblaLocation location)
     {
         Location = location;
     }

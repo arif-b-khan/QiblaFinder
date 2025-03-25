@@ -31,7 +31,7 @@
             <Image x:Name="CompassBackground" Source="compass_bg.png" WidthRequest="300" HeightRequest="300" />
             
             <!-- Compass Rose - this rotates with device heading -->
-            <Grid x:Name="CompassRose" RotationTransformAnchorPoint="0.5,0.5">
+            <Grid x:Name="CompassRose" AnchorX="0.5" AnchorY="0.5">
                 <Label Text="N" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,-15,0,0" />
                 <Label Text="E" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,-15,0" />
                 <Label Text="S" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,-15" />
@@ -40,7 +40,7 @@
             
             <!-- Qibla Arrow - points to Mecca -->
             <Image x:Name="QiblaArrow" Source="qibla_arrow.png" WidthRequest="240" HeightRequest="240" 
-                   RotationTransformAnchorPoint="0.5,0.5" />
+                   AnchorX="0.5" AnchorY="0.5" />
         </Grid>
 
         <!-- Calibration Alert -->

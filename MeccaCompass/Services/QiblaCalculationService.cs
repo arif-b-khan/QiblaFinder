@@ -35,7 +35,7 @@ public class QiblaCalculationService : IQiblaCalculationService
         return qiblaDegrees;
     }
     
-    public double CalculateQiblaDirection(Location location)
+    public double CalculateQiblaDirection(QiblaLocation location)
     {
         if (location == null)
             return 0;
@@ -65,7 +65,7 @@ public class QiblaCalculationService : IQiblaCalculationService
         return distance;
     }
     
-    public double CalculateDistanceToMecca(Location location)
+    public double CalculateDistanceToMecca(QiblaLocation location)
     {
         if (location == null)
             return 0;
