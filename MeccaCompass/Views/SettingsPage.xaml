@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MeccaCompass.ViewModels"
+             x:Class="MeccaCompass.Views.SettingsPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+        <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <!-- Theme Settings -->
+            <Frame BorderColor="{StaticResource PrimaryColor}" Padding="15" CornerRadius="10">
+                <StackLayout Spacing="10">
+                    <Label Text="Appearance" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Switch IsToggled="{Binding UseDarkMode}" VerticalOptions="Center" />
+                        <Label Text="Dark Mode" VerticalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!-- Location Settings -->
+            <Frame BorderColor="{StaticResource PrimaryColor}" Padding="15" CornerRadius="10">
+                <StackLayout Spacing="10">
+                    <Label Text="Location" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                    
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Switch IsToggled="{Binding UseManualLocation}" VerticalOptions="Center" />
+                        <Label Text="Use Manual Location" VerticalOptions="Center" />
+                    </StackLayout>
+                    
+                    <StackLayout IsEnabled="{Binding UseManualLocation}" Opacity="{Binding UseManualLocation, Converter={StaticResource BoolToOpacityConverter}}">
+                        <Label Text="Latitude" Margin="0,10,0,0" />
+                        <Entry Text="{Binding ManualLatitude}" Keyboard="Numeric" Placeholder="Enter latitude (e.g., 51.5072)" />
+                        
+                        <Label Text="Longitude" Margin="0,10,0,0" />
+                        <Entry Text="{Binding ManualLongitude}" Keyboard="Numeric" Placeholder="Enter longitude (e.g., -0.1276)" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!-- Information -->
+            <Frame BorderColor="{StaticResource PrimaryColor}" Padding="15" CornerRadius="10">
+                <StackLayout Spacing="10">
+                    <Label Text="About" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                    <Label Text="Mecca Compass helps Muslims find the Qibla direction for prayer." FontSize="Small" />
+                    <Label Text="Version 1.0" FontSize="Small" FontAttributes="Italic" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

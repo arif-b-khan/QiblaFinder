@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MeccaCompass.ViewModels"
+             x:Class="MeccaCompass.Views.MainPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings" Command="{Binding NavigateToSettingsCommand}" IconImageSource="settings_icon.png" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Top Info Panel -->
+        <StackLayout Grid.Row="0" Padding="20,10" Spacing="5">
+            <Label Text="Qibla Direction" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label Text="{Binding QiblaDirection, StringFormat='{0:F1}°'}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"/>
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Distance to Mecca:" FontSize="Small" VerticalOptions="Center"/>
+                <Label Text="{Binding DistanceToMecca, StringFormat='{0:F1} km'}" FontSize="Small" FontAttributes="Bold" VerticalOptions="Center"/>
+            </StackLayout>
+            
+            <Label Text="{Binding LocationText}" FontSize="Small" HorizontalOptions="Center" IsVisible="{Binding IsLocationAvailable}"/>
+            <Label Text="Location unavailable. Please check settings." FontSize="Small" TextColor="Red" 
+                   HorizontalOptions="Center" IsVisible="{Binding IsLocationAvailable, Converter={StaticResource InvertedBoolConverter}}"/>
+        </StackLayout>
+
+        <!-- Compass View -->
+        <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+            <!-- Compass Background -->
+            <Image x:Name="CompassBackground" Source="compass_bg.png" WidthRequest="300" HeightRequest="300" />
+            
+            <!-- Compass Rose - this rotates with device heading -->
+            <Grid x:Name="CompassRose" RotationTransformAnchorPoint="0.5,0.5">
+                <Label Text="N" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,-15,0,0" />
+                <Label Text="E" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,-15,0" />
+                <Label Text="S" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,-15" />
+                <Label Text="W" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center" Margin="-15,0,0,0" />
+            </Grid>
+            
+            <!-- Qibla Arrow - points to Mecca -->
+            <Image x:Name="QiblaArrow" Source="qibla_arrow.png" WidthRequest="240" HeightRequest="240" 
+                   RotationTransformAnchorPoint="0.5,0.5" />
+        </Grid>
+
+        <!-- Calibration Alert -->
+        <Frame Grid.Row="2" BackgroundColor="LightYellow" Padding="10" Margin="10" 
+               BorderColor="Orange" IsVisible="{Binding ShowCalibrationAlert}">
+            <StackLayout>
+                <Label Text="Compass may need calibration" TextColor="DarkOrange" FontAttributes="Bold" HorizontalOptions="Center" />
+                <Button Text="Calibrate" Command="{Binding CalibrateCompassCommand}" HorizontalOptions="Center" />
+            </StackLayout>
+        </Frame>
+
+        <!-- Busy Indicator -->
+        <ActivityIndicator Grid.RowSpan="3" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+    </Grid>
+</ContentPage>
